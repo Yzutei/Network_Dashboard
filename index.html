@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Network Dashboard</h1>
+
+    <div class="container">
+        <h3>Bandwith Usage</h3>
+        <canvas id="networkChart"></canvas>
+    </div>
+
+    <div class="container">
+        <h3>Active Network Sockets (TCP/UDP)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Process (PID)</th>
+                    <th>Proto</th>
+                    <th>Local Address</th>
+                    <th>Remote Address</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="connBody"></tbody>
+        </table>
+    </div>
+
+</body>
+</html>
