@@ -43,6 +43,9 @@ td {
     border-bottom: 1px solid #21262d;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9em;
+    word-break: break-all;
+    white-space: normal;
+    max-width: 200px;
 }
 
 tr:hover { background-color: #1c2128; }
@@ -59,3 +62,44 @@ canvas {
     width: 100% !important;
     height: auto !important;
 }
+
+.privacy-control{
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9em;
+    color: #8b949e;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #30363d;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px; width: 14px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider { background-color: #238636; }
+input:checked + .slider:before { transform: translateX(20px); }

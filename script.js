@@ -1,9 +1,26 @@
 const ctx = document.getElementById('networkChart').getContext('2d');
+const privacytoggle = document.getElementById('privacytoggle');
 
 // init arry
 const timeLabels = [];
 const downloadData = [];
 const uploadData = [];
+
+// privacy toggle
+function maskData(string) {
+    if (!privacytoggle.checked) return string; // If off, return original
+    if (string.includes("localhost") || string.includes("127.0.0.1") || string === "Listening") return string;
+
+
+    if (string.includes('.')) {
+        const parts = string.split('.');
+        if (parts.length > 2) {
+            return `${parts[0]}.${parts[1]}.x.x`;
+        }
+    }
+    return "[HIDDEN]";
+}
+
 
 // Initialize Chart.js line graph
 const chart = new Chart(ctx, {
@@ -86,12 +103,15 @@ async function fetchConnections() {
         data.forEach(conn => {
             // Set a color for the status (Green for active, Grey for listening)
             const statusColor = conn.status === 'ESTABLISHED' ? '#3fb950' : '#8b949e';
+
+            const safeLocal = maskData(conn.laddr);
+            const safeRemote = maskData(conn.raddr);
             
             const row = `<tr>
                 <td><strong>${conn.app}</strong> <small>(${conn.pid})</small></td>
                 <td>${conn.type}</td>
-                <td>${conn.laddr}</td>
-                <td>${conn.raddr}</td>
+                <td>${safeLocal}</td>
+                <td>${safeRemote}</td>
                 <td style="color: ${statusColor}; font-weight: bold;">${conn.status}</td>
             </tr>`;
 
